@@ -1,20 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 import useFetch from "./useFetch";
+import Blogs from "./Blogs";
 
 const BlogDetail = () => {
 
     const {id} = useParams()
     const {data : blogs, isPending, error} =  useFetch("http://localhost:8000/blogs/" + id)
 
-    console.log(blogs)
-
     return ( 
         <div className="blog-details">
-            <h2>Hello, details : {id} </h2>
             {isPending && <div>loading </div>}
             {error && <div> {error} </div>}
-
+            {blogs && (
+                <article>
+                    <h2>{blogs.title}</h2>
+                    <p>{blogs.body}</p>
+                </article>
+            )}
         </div>
      );
 }

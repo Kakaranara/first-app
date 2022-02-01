@@ -11,6 +11,9 @@ const Navbar = () => {
                     backgroundColor: "#f1356d",
                     borderRadius: '8px'
                 }}>New Blog</Link>
+                <Link to="/test">
+                    Test Purpose
+                </Link>
             </div>
         </nav>
      );

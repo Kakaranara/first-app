@@ -11,7 +11,7 @@ const Blogs = ({blogs, title, handleDelete}) => {
                 <div className="blog-preview" key={blog.id}>
                     <Link to={`/blog/${blog.id}`}>
                         <h2>{blog.title}</h2>
-                        <p>{blog.body}</p>
+                        <p> {blog.author}</p>
                     </Link> 
                 </div>
             )}
