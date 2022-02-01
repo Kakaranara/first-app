@@ -1,34 +1,16 @@
 import { useEffect, useState } from "react";
 import Blogs from "./Blogs";
+import useFetch from "./useFetch";
 
 const Home = () => {
 
-    const [blogs, setBlogs] = useState(null)
-    const [isPending, setPending] = useState(true)
-
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    }
-
-    const [name, setName] = useState('mario')
-
-    useEffect(() => {
-        fetch('http://localhost:8000/blogs').then(res =>
-            res.json()
-        ).then(data => {
-            setBlogs(data)
-            setPending(false)
-            console.log(data)
-        })
-    }, [])
-
+    const {data : blogs, isPending, error} = useFetch('http://localhost:8000/blogs')
 
     return (
         <div className="home">
+            {error && <div> {error} </div>}
             {isPending && <div> loading.. </div>}
-            {blogs && <Blogs blogs={blogs} title="Hi ALL" handleDelete={handleDelete} />}
-            <button onClick={() => setName('luigi')}>change name</button>
+            {blogs && <Blogs blogs={blogs} title="Hi ALL" />}
         </div>
     );
 }
